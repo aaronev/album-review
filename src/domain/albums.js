@@ -7,6 +7,6 @@ albums.all = () =>
   DBAlbums.all()
   
 albums.findByID = (ID) => 
-  DBAlbums.find('id', ID)
+  DBAlbums.find('id', ID).then(album => album[0])
 
 module.exports = albums

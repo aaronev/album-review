@@ -31,5 +31,6 @@ CREATE TABLE test (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
+  tabl2_id INTEGER,
   timestamp TIMESTAMP DEFAULT current_timestamp
 );
