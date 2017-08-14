@@ -32,7 +32,8 @@ module.exports = class SQLInjections {
         (${this.columns}) 
       VALUES 
         (${this.injectInto$1$2etc()})
-      `, valuesAsAnArray
+      RETURNING
+        *`, valuesAsAnArray
     )
   }
   
@@ -83,5 +84,13 @@ module.exports = class SQLInjections {
       LIMIT $1
       `, limit
     )
+  }
+
+  truncate() {
+    return this.errorHandler(`
+      TRUNCATE 
+        ${this.table}
+      RESTART IDENTITY
+    `)
   }
 }
