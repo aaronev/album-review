@@ -17,7 +17,7 @@ module.exports = class SQLInjections {
     })
   }
 
-  generate_$1$2etc() {
+  injectInto$1$2etc() {
     let colmns = []
     for (let i = 1; i <= this.columns.length; i++) {
       colmns.push('$'+ i)
