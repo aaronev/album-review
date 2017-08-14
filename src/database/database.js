@@ -31,7 +31,7 @@ module.exports = class SQLInjections {
         ${this.table} 
         (${this.columns}) 
       VALUES 
-        (${this.generate_$1$2etc()})
+        (${this.injectInto$1$2etc()})
       `, valuesAsAnArray
     )
   }

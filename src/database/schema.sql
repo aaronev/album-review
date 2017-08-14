@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS albums;
+DROP TABLE IF EXISTS test;
 
 CREATE TABLE albums (
   id SERIAL PRIMARY KEY,
@@ -23,5 +24,12 @@ CREATE TABLE reviews (
   user_id INTEGER REFERENCES users,
   album_id INTEGER REFERENCES albums,
   review TEXT NOT NULL,
+  timestamp TIMESTAMP DEFAULT current_timestamp
+);
+
+CREATE TABLE test (
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
   timestamp TIMESTAMP DEFAULT current_timestamp
 );
