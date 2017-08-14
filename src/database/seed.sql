@@ -1,3 +1,5 @@
+--INSERT INTO USERS AND REVIEWS TABLE
+
 INSERT INTO
   albums (title, artist)
 VALUES
