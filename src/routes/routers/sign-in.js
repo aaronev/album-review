@@ -1,3 +1,4 @@
+const router = require('express').Router()
 const passport = require('../../config/authentication')
 
 router.route('/sign-in')
@@ -11,3 +12,5 @@ router.route('/sign-in')
     failureRedirect: '/sign-in',
     failureFlash: true
   }))
+
+module.exports = router

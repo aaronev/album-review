@@ -1,3 +1,5 @@
+const router = require('express').Router()
+
 router.route('/sign-up')
   .get((req, res) => { 
     res.render('sign-up') 
@@ -16,3 +18,5 @@ router.route('/sign-up')
       }
     }).catch(next)
   })
+
+  module.exports = router
