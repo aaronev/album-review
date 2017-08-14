@@ -10,7 +10,9 @@ router.get('/', (req, res, next) => {
     .then( users => {
       reviews.latest3()
       .then( reviews => {
-        res.render('index', {albums, reviews, users})
+        res.render('index', { 
+          albums, reviews, users 
+        })
       }).catch(next)
     }).catch(next)
   }).catch(next)

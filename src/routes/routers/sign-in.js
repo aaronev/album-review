@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const passport = require('../../config/authentication')
 
-router.route('/sign-in')
+router.route('/')
   .get((req, res) => { 
     req.user
     ? res.redirect(`/users/${req.user.id}`)

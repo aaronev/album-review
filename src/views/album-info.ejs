@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<% include ./partials/header %>
+
+<div class="albums-page">
+
+  <div class="albums-info">
+    <h2><%= albums[0].title%></h2>
+    <h3><%= albums[0].artist%></h3>
+  </div>
+
+  <div class="add-review-buttons">
+    <button class="open-review-button" onclick="showAddForm()">Add Review</button>
+  </div>
+
+  <div class="albums-page-reviews">
+    <h2> Album Reviews </h2>
+      <% include ./lists/reviews %>
+  </div>
+  
+</div>
+
+<% include ./partials/footer %>

@@ -1,0 +1,22 @@
+<!DOCTYPE html
+
+<% include ./partials/header %>
+
+<div class ="users-page">
+  
+  <div class="user-block">
+    <img width="150" height="150" src=<%= users.image %> />
+    <div class="user-info">
+      <h2><%= users.name %></h2>
+      <h4> Email: <%= users.email %> </h4>
+      <h5> Joined:  <%= users.timestamp %> </h5>
+     </div>
+  </div>
+
+  <div>
+    <h2>Reviews</h2>
+    <% include ./lists/reviews %>
+  </div>
+</div>
+
+<% include ./partials/footer %>

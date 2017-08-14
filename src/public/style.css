@@ -1,5 +1,19 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
+a:link {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.border-solid {
+  border: solid;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
 }

@@ -1,1 +1,16 @@
 <!DOCTYPE html>
+
+<div class="add-review-form">
+
+  <h2>New review for <%= albums[0].title%></h2>
+
+  <form  method="post" action="/albums/<%=albums[0].id%>/reviews">
+    <textarea class="border" name="review" required></textarea>
+    <br><input type="submit" value="Post"/>
+  </form>
+
+  <div class="add-review-buttons">
+    <button class="close-review-button" onclick="hideAddForm()">Cancel</button>
+  </div>
+  
+</div> 

@@ -1,6 +1,7 @@
 const router = require('express').Router()
+const users = require('../../domain/users')
 
-router.route('/sign-up')
+router.route('/')
   .get((req, res) => { 
     res.render('sign-up') 
   })
@@ -13,7 +14,7 @@ router.route('/sign-up')
         res.redirect('/sign-up')
       } else {
         users.create(name, email, password, '/img/no-dj.png')
-        .then(addedUsers => { res.redirect('/authenticate/sign-in') })
+        .then(addedUsers => { res.redirect('/sign-in') })
         .catch(next)
       }
     }).catch(next)

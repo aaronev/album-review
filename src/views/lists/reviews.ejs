@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 
-<div class="list-reviews">
+<div>
+  <% if (album.id === review.album_id) { %>
+    <h4>
+      <a href="/albums/<%= album.id %>"><%= album.title%></a>
+    </h4> 
+  <% } %>
 
+  <h6><%= review.timestamp%></h6>
+
+  <% if (userSess) { %>
+    <%if (userSess.id === review.user_id) { %>
+      <input type="image" onclick="confirmDelete(<%= review.id%>)" width="20" src="/img/trash.png" />
+    <% } %>
+  <% } %>
+
+  <p><%= review.review %></p>
+
+  <% if (user.id === review.user_id) { %>
+    <h5><a href="/users/<%= user.id %>"><%= user.name%></a></h5>
+  <% } %>
 </div>
