@@ -3,7 +3,6 @@ const albums = require('../../domain/albums')
 const reviews = require('../../domain/reviews')
 const users = require('../../domain/users')
 
-
 router.get('/', (req, res, next) => {
   albums.all()
   .then( albums => {
@@ -11,7 +10,7 @@ router.get('/', (req, res, next) => {
     .then( users => {
       reviews.latest3()
       .then( reviews => {
-      res.send(albums)
+        res.send(albums)
       }).catch(next)
     }).catch(next)
   }).catch(next)
