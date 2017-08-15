@@ -4,7 +4,9 @@ const passport = require('../../config/authentication')
 
 router.route('/')
   .get((req, res) => { 
-    res.render('sign-up') 
+    ! req.user
+    ? res.render('sign-up') 
+    : res.redirect(`/users/${req.user.id}`)
   })
   .post((req, res, next) => {
     const {name, email, password} = req.body
@@ -15,10 +17,10 @@ router.route('/')
         res.redirect('/sign-up')
       } else {
         users.create(name, email, password, '/img/no-dj.png')
-        .then(addedUser => { 
+        .then(() => { 
           passport.authenticate('local')
           (req, res, () => {
-            res.redirect(`/users/${req.user.id}`)
+            res.redirect('/sign-up')
           })
         }).catch(next)
       }
