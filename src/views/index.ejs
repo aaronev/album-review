@@ -25,7 +25,20 @@
 
     <div class="reviews">
       <h2>Recent Reviews</h2>
-      <% include ./lists/reviews %>
+      <% reviews.forEach(function(review) { %>
+        <% albums.forEach(function(album) { %>
+          <% if (album.id === review.album_id) {%>
+            <h3><%= album.title%></h3>
+          <% } %>
+        <% })%>
+        <h6><%= review.timestamp %></h6>
+        <p><%= review.review%></p>
+        <% users.forEach(function(user) { %>
+          <% if (user.id === review.user_id) {%>
+            <h4>By: <%= user.name %></h4>
+          <% }%>
+        <% }) %>
+      <% })%>
     </div>
     
   </div>

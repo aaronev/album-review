@@ -7,8 +7,9 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser((id, done) => {
+  console.log('4. it get deserializeUser', id)
   users.findByID(id)
-  .then(users => done(null, users)) 
+  .then(user => done(null, user)) 
 })
 
 passport.use('local', new LocalStrategy({

@@ -5,17 +5,25 @@
 <div class="albums-page">
 
   <div class="albums-info">
-    <h2><%= albums[0].title%></h2>
-    <h3><%= albums[0].artist%></h3>
+    <h1><%= album.title%></h1>
   </div>
 
-  <div class="add-review-buttons">
-    <button class="open-review-button" onclick="showAddForm()">Add Review</button>
-  </div>
+  <a href="" >Add Review</a>
 
   <div class="albums-page-reviews">
     <h2> Album Reviews </h2>
-      <% include ./lists/reviews %>
+    <div class="reviews">
+      <% reviews.forEach(function(review) { %>
+        <h3><%= album.title%></h3>
+        <h6><%= review.timestamp %></h6>
+        <p><%= review.review%></p>
+        <% users.forEach(function(user) { %>
+          <% if (user.id === review.user_id) {%>
+            <h4>By: <%= user.name %></h4>
+          <% }%>
+        <% }) %>
+      <% })%>
+    </div>
   </div>
   
 </div>

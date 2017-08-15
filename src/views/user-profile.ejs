@@ -5,17 +5,26 @@
 <div class ="users-page">
   
   <div class="user-block">
-    <img width="150" height="150" src=<%= users.image %> />
+    <img width="150" height="150" src=<%= user.image %> />
     <div class="user-info">
-      <h2><%= users.name %></h2>
-      <h4> Email: <%= users.email %> </h4>
-      <h5> Joined:  <%= users.timestamp %> </h5>
+      <h2><%= user.name %></h2>
+      <h4> Email: <%= user.email %> </h4>
+      <h5> Joined:  <%= user.timestamp %> </h5>
      </div>
   </div>
 
   <div>
     <h2>Reviews</h2>
-    <% include ./lists/reviews %>
+    <% reviews.forEach(function(review) { %>
+      <% albums.forEach(function(album) { %>
+        <% if (album.id === review.album_id) {%>
+          <h3><%= album.title%></h3>
+        <% }%>
+      <% }) %>
+      <h6><%= review.timestamp %></h6>
+      <p><%= review.review%></p>
+      <h4>By: <%= user.name %></h4>
+    <% })%>
   </div>
 </div>
 

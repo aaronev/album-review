@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const users = require('../../domain/users')
+const passport = require('../../config/authentication')
 
 router.route('/')
   .get((req, res) => { 
@@ -14,10 +15,14 @@ router.route('/')
         res.redirect('/sign-up')
       } else {
         users.create(name, email, password, '/img/no-dj.png')
-        .then(addedUsers => { res.redirect('/sign-in') })
-        .catch(next)
+        .then(addedUser => { 
+          passport.authenticate('local')
+          (req, res, () => {
+            res.redirect(`/users/${req.user.id}`)
+          })
+        }).catch(next)
       }
     }).catch(next)
   })
 
-  module.exports = router
+module.exports = router

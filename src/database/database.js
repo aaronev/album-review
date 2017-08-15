@@ -9,14 +9,6 @@ module.exports = class SQLInjections {
     this.columns = insertIntoColumns
   }
 
-  errorHandler(SQLCommand, queryParams) {
-    return db.any(SQLCommand, queryParams)
-    .catch(error => {
-      console.log('ERROR: Queries ===> ', error)
-      throw error
-    })
-  }
-
   injectInto$1$2etc() {
     let colmns = []
     for (let i = 1; i <= this.columns.length; i++) {
@@ -26,7 +18,7 @@ module.exports = class SQLInjections {
   }
   
   insert(valuesAsAnArray) {
-    return this.errorHandler(`
+    return db.any(`
       INSERT INTO 
         ${this.table} 
         (${this.columns}) 
@@ -34,20 +26,26 @@ module.exports = class SQLInjections {
         (${this.injectInto$1$2etc()})
       RETURNING
         *`, valuesAsAnArray
-    )
+    ).catch(error => { 
+      console.log('ERROR: INSERT ==>', error)
+      throw error 
+    })
   }
   
   delete(column, value) {
-    return this.errorHandler(`
+    return db.any(`
       DELETE FROM 
         ${this.table} 
       WHERE 
         ${column} = $1`, value
-    )
+    ).catch(error => { 
+      console.log('ERROR: DELETE ==>', error)
+      throw error 
+    })
   }
 
   all() {
-    return this.errorHandler(`
+    return db.any(`
       SELECT 
         * 
       FROM 
@@ -55,11 +53,14 @@ module.exports = class SQLInjections {
       ORDER BY 
         timestamp
       DESC`
-    )
+    ).catch(error => { 
+      console.log('ERROR: SELECT * ==>', error)
+      throw error 
+    })
   }
 
   find(column, value) { 
-    return this.errorHandler(`
+    return db.any(`
       SELECT 
         * 
       FROM 
@@ -69,11 +70,14 @@ module.exports = class SQLInjections {
       ORDER BY 
         timestamp
       DESC`, value
-    )
+    ).catch(error => { 
+      console.log('ERROR: FIND ==>', error)
+      throw error 
+    })
   }
 
   limit(limit) {
-    return this.errorHandler(`
+     return db.any(`
       SELECT 
         * 
       FROM 
@@ -83,14 +87,20 @@ module.exports = class SQLInjections {
       DESC
       LIMIT $1
       `, limit
-    )
+    ).catch(error => { 
+      console.log('ERROR: LIMIT ==>', error)
+      throw error 
+    })
   }
 
   truncate() {
-    return this.errorHandler(`
+     return db.any(`
       TRUNCATE 
         ${this.table}
       RESTART IDENTITY
-    `)
+    `).catch(error => { 
+      console.log('ERROR: TRUNCATE ==>', error)
+      throw error 
+    })
   }
 }

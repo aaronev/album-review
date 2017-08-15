@@ -20,7 +20,9 @@ router.get('/:id', (req, res, next) => {
 
 router.route('/:id/reviews/new')
   .get((req, res) => {
-    res.render('new-review')
+    ! req.user
+    ? res.redirect('/sign-up')
+    : res.render('new-review')
   })
   .post((req, res, next) => {
     ! req.user

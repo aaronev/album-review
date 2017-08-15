@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const DBTable = require('../../src/database/database')
 
-describe('DB Integration SQL Injection', () => {
+describe('Integration Test DB SQL Injection', () => {
 const DBTest = new DBTable('test', ['first_name', 'last_name'])
   it('Inserts new data', () => 
     DBTest.insert(['aaron','villanueva'])

@@ -8,17 +8,17 @@
 
   <body>
 
-  <nav class="border-solid">
-    <a href="/"><img src="/img/colorful-vinyl.jpg"/>
+  <nav>
+    <a href="/" class="left"><img src="/img/colorful-vinyl.jpg"/>
       <span>Vinyl</span>
     </a>
-    <ul>
+    <ul class="signs">
       <% if (userSess) { %>
-        <li><a href="/sign-out">Sign Out</a></li>
-        <li><a href="/users/<%= userSess.id%>">Profile</a></li>
+        <li class="right"><a href="/sign-out">Sign Out</a></li>
+        <li class="right"><a href="/users/<%= userSess.id%>">Profile</a></li>
       <% } else { %>
-        <li><a href="/sign-in">Sign In</a></li>
-        <li><a href="/sign-up">Sign Up</a></li>
+        <li class="right"><a href="/sign-in">Sign In</a></li>
+        <li class="right"><a href="/sign-up">Sign Up</a></li>
       <% } %>
     </ul>
   </nav>
