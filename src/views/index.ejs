@@ -2,47 +2,54 @@
 
 <% include ./partials/header %>
 
-<div>
+<div class="homepage">
   
-  <div class="homepage-image">
-    <img src="/img/vinyl-breaking.png"/>
     <h1>Vinyl</h1>
-  </div>
+    <img src="/img/vinyl-breaking.png"/>
 
-  <div>
-    
+  <div class="container">
     <div>
-      <h2>Records</h2>
-      <div>
-        <% albums.forEach(function(album) { %>
+      <h2 >Records</h2>
+      <% albums.forEach(function(album) { %>
+      <div class="records">
           <h4>
             <a href="/albums/<%= album.id %>"><%= album.title %></a>
           </h4>
           <h5>By: <%= album.artist %></h5>
-        <% }) %>
       </div>
+      <% }) %>
     </div>
 
     <div class="reviews">
       <h2>Recent Reviews</h2>
       <% reviews.forEach(function(review) { %>
-        <% albums.forEach(function(album) { %>
-          <% if (album.id === review.album_id) {%>
-            <h3><%= album.title%></h3>
+        <div class="reviews">
+          <% albums.forEach(function(album) { %>
+            <% if (album.id === review.album_id) {%>
+              <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
+            <% } %>
+          <% })%>
+          
+          <h6><%= review.timestamp %></h6>
+
+           <% if (userSess) { %>
+            <% if (userSess.id === review.user_id) { %>
+              <img onclick="confirmDelete(<%=review.id%>)" src="/img/trash.png"/>
+            <% } %>
           <% } %>
-        <% })%>
-        <h6><%= review.timestamp %></h6>
-        <p><%= review.review%></p>
-        <% users.forEach(function(user) { %>
-          <% if (user.id === review.user_id) {%>
-            <h4>By: <%= user.name %></h4>
-          <% }%>
-        <% }) %>
+
+          <p><%= review.review%></p>
+
+          <% users.forEach(function(user) { %>
+            <% if (user.id === review.user_id) {%>
+              <h4><a href="/users/<%= user.id%>">By: <%= user.name %></a></h4>
+            <% }%>
+          <% }) %>
+        </div>
       <% })%>
     </div>
-    
   </div>
-  
+
 </div>
 
 <% include ./partials/footer %>

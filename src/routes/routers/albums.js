@@ -19,11 +19,12 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.route('/:id/reviews/new')
-  .get((req, res) => {
-    ! req.user
-    ? res.redirect('/sign-up')
-    : res.render('new-review')
-  })
+  .get((req, res, next) => {
+    albums.findByID(req.params.id)
+      .then(album => {
+        res.render('new-review', {album})
+      }).catch(next)
+    })
   .post((req, res, next) => {
     ! req.user
     ? res.redirect('/sign-up')

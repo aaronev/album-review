@@ -17,14 +17,12 @@ router.route('/')
         res.redirect('/sign-up')
       } else {
         users.create(name, email, password, '/img/no-dj.png')
-        .then(() => { 
-          passport.authenticate('local')
-          (req, res, () => {
-            res.redirect('/sign-up')
-          })
-        }).catch(next)
-      }
+          .then(() => { next() }).catch(next)
+        }
     }).catch(next)
+  }, passport.authenticate('local'), 
+    (req, res) => {
+      res.redirect('/sign-up')
   })
 
 module.exports = router

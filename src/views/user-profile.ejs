@@ -13,19 +13,28 @@
      </div>
   </div>
 
-  <div>
-    <h2>Reviews</h2>
-    <% reviews.forEach(function(review) { %>
+  <h2>Reviews</h2>
+  
+  <% reviews.forEach(function(review) { %>
+    <div class="reviews">
       <% albums.forEach(function(album) { %>
         <% if (album.id === review.album_id) {%>
-          <h3><%= album.title%></h3>
+          <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
         <% }%>
       <% }) %>
       <h6><%= review.timestamp %></h6>
+
+       <% if (userSess) { %>
+          <% if (userSess.id === review.user_id) { %>
+            <img onclick="confirmDelete(<%=review.id%>)"src="/img/trash.png"/>
+          <% } %>
+        <% } %>
+
       <p><%= review.review%></p>
       <h4>By: <%= user.name %></h4>
-    <% })%>
-  </div>
+    </div>
+  <% })%>
+
 </div>
 
 <% include ./partials/footer %>

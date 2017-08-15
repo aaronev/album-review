@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <% include ../partials/header %>
-
-  <h1>ERROR: Status 500</h1>
-  <h2><%= error.message %></h2>
-  <pre><%= error.stack %></pre>
-
+  <div class="text-left">
+    <h1>ERROR: Status 500</h1>
+    <h2><%= error.message %></h2>
+    <pre><%= error.stack %></pre>
+  </div>
 <% include ../partials/footer %>

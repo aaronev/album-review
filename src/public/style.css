@@ -1,6 +1,7 @@
 body {
   text-align: center;
 }
+
 li {
   list-style: none;
   display: inline;
@@ -18,15 +19,15 @@ a:hover {
   color: lightgray;
 }
 
-p {
-  text-align: justify;
-}
-
 nav {
   border: solid;
   position: relative;
   width: 100%;
   height: 50px;
+}
+
+nav li {
+  padding: 10px;
 }
 
 nav img {
@@ -40,8 +41,19 @@ nav span {
   font-size: 30px;
 }
 
-.border-solid {
+textarea {
+  resize: none;
+  width: 600px;
+  height: 300px;
   border: solid;
+}
+
+.error {
+  color: red;
+}
+
+.container {
+  display: flex;
 }
 
 .text-left {
@@ -59,3 +71,95 @@ nav span {
 .right {
   float: right;
 }
+
+.homepage img {
+  width: 100%;
+  height: 300px;
+}
+
+.reviews {
+  position: ;
+  border: solid;
+  border-radius: 20px;
+  padding: 10px;
+  width: 80%;
+  overflow-y: scroll;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reviews img {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  text-align: right;
+  float: right;
+  cursor: pointer;
+}
+
+.reviews h3 {
+  text-align: left;
+}
+
+.reviews h6 {
+  text-align: right;
+}
+
+.reviews h4 {
+  text-align: right;
+}
+
+.reviews p {
+  border-style: inset;
+  width: 80%;
+  padding: 10px;
+  height: 50px;
+  text-align: justify;
+  position: relative;
+  top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+}
+
+.records {
+  position: relative;
+  width: 100%;
+  height: 10%;
+  padding: 10px;
+  text-align: left;
+}
+
+.user-block {
+  text-align: left;
+  border: solid;
+  display: flex;
+  float: left;
+  padding: 10px;
+  width: 95%;
+}
+
+.user-info {
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
