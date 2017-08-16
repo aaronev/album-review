@@ -3,6 +3,7 @@ const DBTable = require('../../src/database/database')
 
 describe('Integration Test DB SQL Injection', () => {
 const DBTest = new DBTable('test', ['first_name', 'last_name'])
+  DBTest.truncate()
   it('Inserts new data', () => 
     DBTest.insert(['aaron','villanueva'])
     .then( added => {
