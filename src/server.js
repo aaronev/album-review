@@ -9,7 +9,7 @@ const app = express()
 require('ejs')
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '/views'))
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({secret: 'secret'}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -27,11 +27,11 @@ app.use((req, res, next) => {
 app.use('/', require('./routes'))
 
 app.use((error, req, res, next) => {
-  res.status(500).render('./errors/error', { error })
+  res.status(500).render('./errors/error', {error})
 })
 
-app.use((req, res) => { 
-  res.render('./errors/not-found') 
+app.use((req, res) => {
+  res.render('./errors/not-found')
 })
 
 const port = process.env.PORT || 3000

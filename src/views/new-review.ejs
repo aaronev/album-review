@@ -1,1 +1,18 @@
 <!DOCTYPE html>
+
+<% include ./partials/header %>
+
+<div class="add-review-form">
+
+  <h2>New review for <%= album.title%></h2>
+
+  <form  method="post" action="/albums/<%=album.id%>/reviews/new">
+    <textarea class="border" name="review" required></textarea>
+    <br><input type="submit" value="Submit"/>
+  </form>
+
+  <button><a href="/albums/<%= album.id %>">Cancel</a></button>
+  
+</div> 
+
+<% include ./partials/footer %>

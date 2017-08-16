@@ -1,6 +1,13 @@
 {
   "extends": "airbnb-base",
   "rules": {
+   "comma-dangle": ["error", {
+        "arrays": "ignore",
+        "objects": "ignore",
+        "imports": "ignore",
+        "exports": "ignore",
+        "functions": "ignore"
+    }],
     "semi": ["error", "never"],
     "object-curly-spacing": ["error", "never"],
     "no-use-before-define": ["error", {"functions": false, "classes": true}],

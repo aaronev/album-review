@@ -1,0 +1,40 @@
+<!DOCTYPE html
+
+<% include ./partials/header %>
+
+<div class ="users-page">
+  
+  <div class="user-block">
+    <img width="150" height="150" src=<%= user.image %> />
+    <div class="user-info">
+      <h2><%= user.name %></h2>
+      <h4> Email: <%= user.email %> </h4>
+      <h5> Joined:  <%= user.timestamp %> </h5>
+     </div>
+  </div>
+
+  <h2>Reviews</h2>
+  
+  <% reviews.forEach(function(review) { %>
+    <div class="reviews">
+      <% albums.forEach(function(album) { %>
+        <% if (album.id === review.album_id) {%>
+          <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
+        <% }%>
+      <% }) %>
+      <h6><%= review.timestamp %></h6>
+
+       <% if (userSess) { %>
+          <% if (userSess.id === review.user_id) { %>
+            <img onclick="confirmDelete(<%=review.id%>)"src="/img/trash.png"/>
+          <% } %>
+        <% } %>
+
+      <p><%= review.review%></p>
+      <h4>By: <%= user.name %></h4>
+    </div>
+  <% })%>
+
+</div>
+
+<% include ./partials/footer %>

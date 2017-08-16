@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<% include ./partials/header %>
+
+<div class="albums-page">
+
+  <div class="albums-info">
+    <h1><%= album.title%></h1>
+    <h3><%= album.artist%></h3>
+  </div>
+
+  <button><a href="/albums/<%= album.id %>/reviews/new">Add Review</a></button>
+
+  <div class="albums-page-reviews">
+    <h2> Album Reviews </h2>
+    
+    <% reviews.forEach(function(review) { %>
+      <div class="reviews">
+        <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
+        <h6><%= review.timestamp %></h6>
+
+        <% if (userSess) { %>
+          <% if (userSess.id === review.user_id) { %>
+            <img onclick="confirmDelete(<%=review.id%>)"src="/img/trash.png"/>
+          <% } %>
+        <% } %>
+
+        <p><%= review.review%></p>
+        <% users.forEach(function(user) { %>
+          <% if (user.id === review.user_id) {%>
+             <h4><a href="/users/<%= user.id%>">By: <%= user.name %></a></h4>
+          <% }%>
+        <% }) %>
+      </div>
+    <% })%>
+  </div>
+  
+</div>
+
+<% include ./partials/footer %>

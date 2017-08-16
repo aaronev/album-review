@@ -11,84 +11,79 @@ module.exports = class SQLInjections {
 
   errorHandler(SQLCommand, queryParams) {
     return db.any(SQLCommand, queryParams)
-    .catch(error => {
-      console.log('ERROR: Queries ===> ', error)
-      throw error
-    })
+      .catch((error) => {
+        console.log(`ERROR: ${SQLCommand}:::>>>`, error)
+        throw error
+      })
   }
 
   injectInto$1$2etc() {
-    let colmns = []
+    const colmns = []
     for (let i = 1; i <= this.columns.length; i++) {
-      colmns.push('$'+ i)
+      colmns.push(`$${i}`)
     }
     return colmns.join()
   }
-  
+
   insert(valuesAsAnArray) {
     return this.errorHandler(`
-      INSERT INTO 
-        ${this.table} 
-        (${this.columns}) 
-      VALUES 
+      INSERT INTO
+        ${this.table}
+        (${this.columns})
+      VALUES
         (${this.injectInto$1$2etc()})
       RETURNING
-        *`, valuesAsAnArray
-    )
+        *`, valuesAsAnArray)
   }
-  
+
   delete(column, value) {
     return this.errorHandler(`
-      DELETE FROM 
-        ${this.table} 
-      WHERE 
-        ${column} = $1`, value
-    )
+      DELETE FROM
+        ${this.table}
+      WHERE
+        ${column} = $1`, value)
   }
 
   all() {
     return this.errorHandler(`
-      SELECT 
-        * 
-      FROM 
+      SELECT
+        *
+      FROM
         ${this.table}
-      ORDER BY 
+      ORDER BY
         timestamp
-      DESC`
-    )
+      DESC`)
   }
 
-  find(column, value) { 
+  find(column, value) {
     return this.errorHandler(`
-      SELECT 
-        * 
-      FROM 
-        ${this.table} 
-      WHERE 
+      SELECT
+        *
+      FROM
+        ${this.table}
+      WHERE
         ${column} = $1
-      ORDER BY 
+      ORDER BY
         timestamp
-      DESC`, value
-    )
+      DESC`, value)
   }
 
   limit(limit) {
     return this.errorHandler(`
-      SELECT 
-        * 
-      FROM 
+      SELECT
+        *
+      FROM
         ${this.table}
-      ORDER BY 
+      ORDER BY
         timestamp
       DESC
       LIMIT $1
-      `, limit
-    )
+      `, limit)
   }
 
   truncate() {
     return this.errorHandler(`
-      TRUNCATE 
+      TRUNCATE
         ${this.table}
       RESTART IDENTITY
     `)
