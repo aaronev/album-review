@@ -14,7 +14,8 @@ module.exports = class SQLInjections {
       .catch((error) => {
         console.log(`ERROR: ${SQLCommand}:::>>>`, error)
         throw error
-      })
+      }
+    )
   }
 
   injectInto$1$2etc() {
@@ -33,7 +34,8 @@ module.exports = class SQLInjections {
       VALUES
         (${this.injectInto$1$2etc()})
       RETURNING
-        *`, valuesAsAnArray)
+        *`, valuesAsAnArray
+    )
   }
 
   delete(column, value) {
@@ -41,7 +43,8 @@ module.exports = class SQLInjections {
       DELETE FROM
         ${this.table}
       WHERE
-        ${column} = $1`, value)
+        ${column} = $1`, value
+    )
   }
 
   all() {
@@ -52,7 +55,8 @@ module.exports = class SQLInjections {
         ${this.table}
       ORDER BY
         timestamp
-      DESC`)
+      DESC`
+    )
   }
 
   find(column, value) {
@@ -65,7 +69,8 @@ module.exports = class SQLInjections {
         ${column} = $1
       ORDER BY
         timestamp
-      DESC`, value)
+      DESC`, value
+    )
   }
 
   limit(limit) {
@@ -78,7 +83,8 @@ module.exports = class SQLInjections {
         timestamp
       DESC
       LIMIT $1
-      `, limit)
+      `, limit
+    )
   }
 
   truncate() {
