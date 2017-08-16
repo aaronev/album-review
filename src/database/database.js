@@ -9,98 +9,83 @@ module.exports = class SQLInjections {
     this.columns = insertIntoColumns
   }
 
+  errorHandler(SQLCommand, queryParams) {
+    return db.any(SQLCommand, queryParams)
+      .catch((error) => {
+        console.log(`ERROR: ${SQLCommand}:::>>>`, error)
+        throw error
+      })
+  }
+
   injectInto$1$2etc() {
-    let colmns = []
+    const colmns = []
     for (let i = 1; i <= this.columns.length; i++) {
-      colmns.push('$'+ i)
+      colmns.push(`$${i}`)
     }
     return colmns.join()
   }
-  
+
   insert(valuesAsAnArray) {
-    return db.any(`
-      INSERT INTO 
-        ${this.table} 
-        (${this.columns}) 
-      VALUES 
+    return this.errorHandler(`
+      INSERT INTO
+        ${this.table}
+        (${this.columns})
+      VALUES
         (${this.injectInto$1$2etc()})
       RETURNING
-        *`, valuesAsAnArray
-    ).catch(error => { 
-      console.log('ERROR: INSERT ==>', error)
-      throw error 
-    })
+        *`, valuesAsAnArray)
   }
-  
+
   delete(column, value) {
-    return db.any(`
-      DELETE FROM 
-        ${this.table} 
-      WHERE 
-        ${column} = $1`, value
-    ).catch(error => { 
-      console.log('ERROR: DELETE ==>', error)
-      throw error 
-    })
+    return this.errorHandler(`
+      DELETE FROM
+        ${this.table}
+      WHERE
+        ${column} = $1`, value)
   }
 
   all() {
-    return db.any(`
-      SELECT 
-        * 
-      FROM 
+    return this.errorHandler(`
+      SELECT
+        *
+      FROM
         ${this.table}
-      ORDER BY 
+      ORDER BY
         timestamp
-      DESC`
-    ).catch(error => { 
-      console.log('ERROR: SELECT * ==>', error)
-      throw error 
-    })
+      DESC`)
   }
 
-  find(column, value) { 
-    return db.any(`
-      SELECT 
-        * 
-      FROM 
-        ${this.table} 
-      WHERE 
+  find(column, value) {
+    return this.errorHandler(`
+      SELECT
+        *
+      FROM
+        ${this.table}
+      WHERE
         ${column} = $1
-      ORDER BY 
+      ORDER BY
         timestamp
-      DESC`, value
-    ).catch(error => { 
-      console.log('ERROR: FIND ==>', error)
-      throw error 
-    })
+      DESC`, value)
   }
 
   limit(limit) {
-     return db.any(`
-      SELECT 
-        * 
-      FROM 
+    return this.errorHandler(`
+      SELECT
+        *
+      FROM
         ${this.table}
-      ORDER BY 
+      ORDER BY
         timestamp
       DESC
       LIMIT $1
-      `, limit
-    ).catch(error => { 
-      console.log('ERROR: LIMIT ==>', error)
-      throw error 
-    })
+      `, limit)
   }
 
   truncate() {
-     return db.any(`
-      TRUNCATE 
+    return this.errorHandler(`
+      TRUNCATE
         ${this.table}
       RESTART IDENTITY
-    `).catch(error => { 
-      console.log('ERROR: TRUNCATE ==>', error)
-      throw error 
-    })
+    `)
   }
 }

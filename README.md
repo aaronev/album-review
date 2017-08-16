@@ -51,5 +51,6 @@ schema.sql    # - file within database that shows all the columns of each tables
 seed.sql    # - file within database that seed the ablums, users, and reviews data
 domain/     # folder is for abstract functions 
 public/     # folder is static and used for image files, css, and vanilla js
+routes/     # folder contains routes for server
 views/      # folder renders get method pages layouts and information as ejs html template
 ```

@@ -27,11 +27,11 @@ app.use((req, res, next) => {
 app.use('/', require('./routes'))
 
 app.use((error, req, res, next) => {
-  res.status(500).render('./errors/error', { error })
+  res.status(500).render('./errors/error', {error})
 })
 
-app.use((req, res) => { 
-  res.render('./errors/not-found') 
+app.use((req, res) => {
+  res.render('./errors/not-found')
 })
 
 const port = process.env.PORT || 3000
